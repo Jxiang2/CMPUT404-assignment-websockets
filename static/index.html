@@ -57,6 +57,11 @@
         world={}
       
         //XXX: TODO Make this prettier!
+        // worked with Jionghao chen (jionghao) on the rgb generator
+        function rgbGenerator() {
+            color = 'rgb(' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ',' + Math.round(Math.random() * 255) + ')';
+            return color;
+        }
         function drawCircle(context,entity) {
             with(context) {
                 beginPath();              
@@ -253,18 +258,20 @@
         
         // Add the application specific mouse listeners!
         //XXX: TODO Make these prettier!
-        var randomGenerator = (min, max) => Math.floor(Math.random() * (max - min) + min);
+
+        // worked with Jionghao chen (jionghao) on the reandom radius generator
+        var randomRadiusGenerator = (min, max) => Math.floor(Math.random() * (max - min) + min);
         mouse.mousedowners.push(function(x,y,clicked,e) {
-            addEntityWithoutName({'x':x,'y':y,'colour':'green'});
+            addEntityWithoutName({'x':x,'y':y,'colour':rgbGenerator(), 'radius': randomRadiusGenerator(10, 50)});
         });
         
         mouse.mouseuppers.push(function(x,y,clicked,e) {
-            addEntityWithoutName({'x':x,'y':y,'colour':'green'});
+            addEntityWithoutName({'x':x,'y':y,'colour':rgbGenerator(), 'radius': randomRadiusGenerator(10, 50)});
         });
         
         mouse.mousedraggers.push(function(x,y,clicked,e) {
-            addEntityWithoutName({'x':x,'y':y,'colour':'green',
-                                    'radius':10});
+            addEntityWithoutName({'x':x,'y':y,'colour':rgbGenerator(),
+                                    'radius':randomRadiusGenerator(10, 50)});
         });
         
         
