@@ -72,20 +72,10 @@ class Client:
 clients = list()
 myWorld = World()
 
-# Updates each client
-def send_all(msg):
-    for client in clients:
-        client.put(msg)
-
-# Calls send_all to update all the clients
-def send_all_json(obj):
-    send_all(json.dumps(obj))
-
-# Will update the clients with the json data
 def set_listener( entity, data ):
     ''' do something with the update ! '''
-    obj = {entity: data}
-    send_all_json(obj)
+    for client in clients:
+        client.put(json.dumps({entity: data}))
 
 myWorld.add_set_listener( set_listener )
 
@@ -104,7 +94,7 @@ def read_ws(ws,client):
                 myWorld.set(entity, packet[entity])
 
 
-# TO BE MODIFIED
+
 @sockets.route('/subscribe')
 def subscribe_socket(ws):
     '''Fufill the websocket URL of /subscribe, every update notify the
@@ -114,7 +104,6 @@ def subscribe_socket(ws):
     g = gevent.spawn(read_ws, ws, client)
     try:
         while True:
-            # block here
             msg = client.get()
             print("Got a message!")
             ws.send(msg)
