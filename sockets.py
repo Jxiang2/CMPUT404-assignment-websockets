@@ -58,7 +58,8 @@ class World:
     
     def world(self):
         return self.space
-    
+
+# reference : https://github.com/abramhindle/WebSocketsExamples/blob/master/broadcaster.py   
 class Client:
     def __init__(self):
         self.queue = queue.Queue()
@@ -79,6 +80,7 @@ def set_listener( entity, data ):
 
 myWorld.add_set_listener( set_listener )
 
+# reference : https://github.com/abramhindle/WebSocketsExamples/blob/master/broadcaster.py 
 def read_ws(ws,client):
     '''A greenlet function that reads from the websocket and updates the world'''
     while True:
@@ -94,7 +96,7 @@ def read_ws(ws,client):
                 myWorld.set(entity, packet[entity])
 
 
-
+# reference : https://github.com/abramhindle/WebSocketsExamples/blob/master/broadcaster.py 
 @sockets.route('/subscribe')
 def subscribe_socket(ws):
     '''Fufill the websocket URL of /subscribe, every update notify the
