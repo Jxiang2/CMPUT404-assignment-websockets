@@ -83,17 +83,20 @@ myWorld.add_set_listener( set_listener )
 # reference : https://github.com/abramhindle/WebSocketsExamples/blob/master/broadcaster.py 
 def read_ws(ws,client):
     '''A greenlet function that reads from the websocket and updates the world'''
-    while True:
-        msg = ws.receive()
-        if msg == None:
-            print("exit loop")
-            break
-        else:
-            # load a pkt
-            packet = json.loads(msg)
-            # update world
-            for entity in packet:
-                myWorld.set(entity, packet[entity])
+    try:
+        while True:
+            msg = ws.receive()
+            if msg == None:
+                print("exit loop")
+                break
+            else:
+                # load a pkt
+                packet = json.loads(msg)
+                # update world
+                for entity in packet:
+                    myWorld.set(entity, packet[entity])
+    except:
+        '''Done'''
 
 
 # reference : https://github.com/abramhindle/WebSocketsExamples/blob/master/broadcaster.py 

@@ -65,6 +65,6 @@ Collaborators
 ============
 * jionghao (on rgb generator and random radius generator)
 
-REference
+Reference
 ============
 * https://github.com/abramhindle/WebSocketsExamples/blob/master/broadcaster.py
